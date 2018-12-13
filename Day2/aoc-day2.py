@@ -4,8 +4,8 @@ from typing import List, Any
 
 class InventoryConundrum:
     theInput = []
-    twoResult = []
-    threeResult = []
+    twoResult = {}
+    threeResult = dict()
 
 
     @classmethod
@@ -96,45 +96,22 @@ class InventoryConundrum:
         for ii in self.theInput:
             for aa, bb in ii.items():
                 for jj, kk in bb.items():
-                    if len(self.twoResult) == 0:
-                        twoTemp = {aa.strip(): {kk: 1}}
-                        self.twoResult.append(twoTemp)
-                        print("ran adding two...")
-                    else:
-                        for zz in self.twoResult:
-                            for xx, yy in zz.items():
-                                    #print(aa, xx)
-                                    if aa == xx:
-                                        continue
-                                    else:
-                                        if kk == 2:
-                                            twoTemp = {aa.strip():{kk:1}}
-                                            self.twoResult.append(twoTemp)
-                                            print("ran twoResult...")
+                    if kk == 2:
+                        twoValue = {aa: {kk: 1}}
+                        if aa not in self.twoResult.keys():
+                            self.twoResult[aa] = kk
+                            print("ran twoResult...")
 
-                    if len(self.threeResult) == 0:
-                        threeTemp = {aa.strip(): {kk: 1}}
-                        self.threeResult.append(threeTemp)
-                        print("ran adding three...")
-                    else:
-                        for ff in self.threeResult:
-                            for gg, hh in ff.items():
+                    if kk == 3:
+                        if aa not in self.threeResult.keys():
+                            self.threeResult[aa] = kk
+                            print("ran threeResult...")
 
-                                    #print(aa, gg)
-                                    if aa == gg:
-                                        continue
-                                    else:
-                                        if kk == 3:
-                                            threeTemp = {aa.strip():{kk:1}}
-                                            self.threeResult.append(threeTemp)
-                                            print("ran threeResult...")
     @classmethod
     def PrintResult(self):
-        for ii in self.twoResult:
-            print(ii)
+        theResult = len(self.twoResult) * len(self.threeResult)
+        print(str(theResult))
 
-        for jj in self.threeResult:
-            print(jj)
 
 if __name__ == '__main__':
     fileNamu = 'aoc-day2-input.txt'
